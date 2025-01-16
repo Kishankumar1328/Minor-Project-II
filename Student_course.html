@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Course Information - Introduction to Computer Science</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+        }
+
+        body {
+            background-color: #f8f9fe;
+        }
+
+        .header {
+            background: linear-gradient(135deg, #4c6fff 0%, #6e48ff 100%);
+            color: white;
+            padding: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 1rem;
+        }
+
+        .course-title {
+            font-size: 2rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .course-subtitle {
+            opacity: 0.9;
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+            padding: 1rem;
+        }
+
+        .card {
+            background: white;
+            border-radius: 12px;
+            padding: 1.5rem;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .card-header {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            margin-bottom: 1rem;
+            color: #4c6fff;
+            font-weight: bold;
+        }
+
+        .card-content {
+            color: #333;
+        }
+
+        .list-item {
+            padding: 0.75rem;
+            border-radius: 8px;
+            margin-bottom: 0.5rem;
+            background: #f8f9fe;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            cursor: pointer;
+            transition: background-color 0.2s;
+        }
+
+        .list-item:hover {
+            background: #eef1ff;
+        }
+
+        .button {
+            background: #4c6fff;
+            color: white;
+            border: none;
+            padding: 0.5rem 1rem;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 0.9rem;
+            transition: background-color 0.2s;
+        }
+
+        .button:hover {
+            background: #3955cc;
+        }
+
+        .camera-feed {
+            width: 100%;
+            height: 200px;
+            background: #eef1ff;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 1rem;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <div class="container">
+            <h1 class="course-title">Introduction to Computer Science</h1>
+            <p class="course-subtitle">CSC101 • Fall 2024 • Prof. Sarah Johnson</p>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="grid">
+            <!-- Units and Content -->
+            <div class="card">
+                <div class="card-header">
+                    <svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                        <path d="M4 19.5v-15A2.5 2.5 0 0 1 6.5 2H20v20H6.5a2.5 2.5 0 0 1 0-5H20"></path>
+                    </svg>
+                    Units and Content
+                </div>
+                <div class="card-content">
+                    <div class="list-item">Unit 1: Introduction to Programming</div>
+                    <div class="list-item">Unit 2: Data Types and Variables</div>
+                    <div class="list-item">Unit 3: Control Structures</div>
+                </div>
+            </div>
+
+            <!-- Video Lectures -->
+            <div class="card">
+                <div class="card-header">
+                    <svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                        <polygon points="23 7 16 12 23 17 23 7"></polygon>
+                        <rect x="1" y="5" width="15" height="14" rx="2" ry="2"></rect>
+                    </svg>
+                    Video Lectures
+                </div>
+                <div class="card-content">
+                    <div class="list-item">Lecture 1: Course Overview</div>
+                    <div class="list-item">Lecture 2: Basic Syntax</div>
+                    <div class="list-item">Lecture 3: Functions</div>
+                </div>
+            </div>
+
+            <!-- File Management -->
+            <div class="card">
+                <div class="card-header">
+                    <svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                        <path d="M13 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V9z"></path>
+                        <polyline points="13 2 13 9 20 9"></polyline>
+                    </svg>
+                    File Management
+                </div>
+                <div class="card-content">
+                    <div class="list-item">Course Syllabus.pdf</div>
+                    <div class="list-item">Week 1 Notes.pdf</div>
+                    <div class="list-item">Practice Problems.zip</div>
+                </div>
+            </div>
+
+            <!-- Assignment Submission -->
+            <div class="card">
+                <div class="card-header">
+                    <svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                        <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"></path>
+                        <path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"></path>
+                    </svg>
+                    Assignment Submission
+                </div>
+                <div class="card-content">
+                    <div class="list-item">
+                        Assignment 1 <button class="button">Submit</button>
+                    </div>
+                    <div class="list-item">
+                        Assignment 2 <button class="button">Submit</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Course News -->
+            <div class="card">
+                <div class="card-header">
+                    <svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                        <path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"></path>
+                        <path d="M13.73 21a2 2 0 0 1-3.46 0"></path>
+                    </svg>
+                    Course News
+                </div>
+                <div class="card-content">
+                    <div class="list-item">Quiz next week - Chapter 3</div>
+                    <div class="list-item">Office hours canceled tomorrow</div>
+                    <div class="list-item">New study materials uploaded</div>
+                </div>
+            </div>
+
+            <!-- Attendance Tracking -->
+            <div class="card">
+                <div class="card-header">
+                    <svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                        <path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"></path>
+                        <circle cx="12" cy="13" r="4"></circle>
+                    </svg>
+                    Attendance Tracking
+                </div>
+                <div class="card-content">
+                    <div class="camera-feed">Camera Preview</div>
+                    <button class="button" style="width: 100%">Mark Attendance</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

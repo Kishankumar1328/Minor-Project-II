@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Video Lecture</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f6fa;
+            color: #333;
+            margin: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 20px;
+        }
+        .container {
+            max-width: 800px;
+            width: 100%;
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            margin-top: 30px;
+        }
+        .title {
+            color: #4a90e2;
+            font-size: 24px;
+            text-align: center;
+            margin-bottom: 10px;
+        }
+        .video-container {
+            position: relative;
+            width: 100%;
+            padding-bottom: 56.25%;
+            height: 0;
+            margin-bottom: 20px;
+        }
+        .video-container iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border-radius: 10px;
+        }
+        .comments-section {
+            margin-top: 20px;
+        }
+        .comment-box {
+            display: flex;
+            flex-direction: column;
+        }
+        .comment-box textarea {
+            width: 100%;
+            padding: 10px;
+            border-radius: 5px;
+            border: 1px solid #ddd;
+            resize: none;
+            margin-bottom: 10px;
+        }
+        .comment-box button {
+            padding: 10px;
+            border: none;
+            background-color: #4a90e2;
+            color: white;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        .comment-box button:hover {
+            background-color: #357abd;
+        }
+        .comments-list {
+            margin-top: 20px;
+        }
+        .comment {
+            background-color: #f1f3f6;
+            padding: 10px;
+            border-radius: 5px;
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <div class="title">Video Lecture: Course Overview</div>
+    
+    <!-- Video Player -->
+    <div class="video-container">
+        <iframe src="https://www.youtube.com/embed/dQw4w9WgXcQ" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+    </div>
+    
+    <!-- Comment Section -->
+    <div class="comments-section">
+        <h3>Comments and Doubts</h3>
+        <div class="comment-box">
+            <textarea rows="3" placeholder="Enter your doubt or comment here..."></textarea>
+            <button onclick="submitComment()">Submit</button>
+        </div>
+        <div class="comments-list">
+            <div class="comment">Student 1: Could you explain more about data types?</div>
+            <div class="comment">Student 2: I found the syntax examples very helpful!</div>
+            <!-- Additional comments can be dynamically added here -->
+        </div>
+    </div>
+</div>
+
+<script>
+    function submitComment() {
+        const commentText = document.querySelector('.comment-box textarea').value;
+        if (commentText.trim()) {
+            const commentList = document.querySelector('.comments-list');
+            const newComment = document.createElement('div');
+            newComment.classList.add('comment');
+            newComment.textContent = 'You: ' + commentText;
+            commentList.appendChild(newComment);
+            document.querySelector('.comment-box textarea').value = '';
+        }
+    }
+</script>
+
+</body>
+</html>

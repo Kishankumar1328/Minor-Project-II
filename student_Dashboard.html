@@ -1,0 +1,464 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Dashboard - Redesigned</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Inter', sans-serif;
+        }
+
+        body {
+            background-color: #f4f7fe;
+        }
+
+        .dashboard {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 30px;
+        }
+
+        .dashboard-header {
+            background: linear-gradient(135deg, #4776E6 0%, #8E54E9 100%);
+            color: white;
+            padding: 30px;
+            border-radius: 16px;
+            margin-bottom: 30px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 10px 20px rgba(71, 118, 230, 0.1);
+        }
+
+        .user-info {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .user-avatar {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.2);
+            backdrop-filter: blur(10px);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+            border: 2px solid rgba(255, 255, 255, 0.5);
+        }
+
+        .dashboard-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 25px;
+            margin-bottom: 40px;
+        }
+
+        @media (max-width: 1200px) {
+            .dashboard-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .dashboard-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .card {
+            background: white;
+            border-radius: 16px;
+            padding: 25px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            transition: transform 0.3s ease;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+        }
+
+        .card-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            padding-bottom: 15px;
+            border-bottom: 2px solid #f4f7fe;
+        }
+
+        .card h3 {
+            color: #2D3748;
+            font-size: 1.25em;
+            font-weight: 600;
+        }
+
+        .badge {
+            background: #EBF5FF;
+            color: #4776E6;
+            padding: 5px 12px;
+            border-radius: 20px;
+            font-size: 0.85em;
+            font-weight: 500;
+        }
+
+        .notice {
+            background: #f8faff;
+            padding: 20px;
+            border-radius: 12px;
+            margin-bottom: 20px;
+            border: 1px solid #edf2ff;
+        }
+
+        .notice:last-child {
+            margin-bottom: 0;
+        }
+
+        .notice-header {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 12px;
+        }
+
+        .notice-title {
+            font-weight: 600;
+            color: #2D3748;
+        }
+
+        .notice-date {
+            color: #718096;
+            font-size: 0.9em;
+        }
+
+        .notice-content {
+            color: #4A5568;
+            line-height: 1.6;
+            margin-bottom: 15px;
+        }
+
+        .notice-actions {
+            display: flex;
+            gap: 12px;
+            margin-top: 15px;
+        }
+
+        .btn {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 0.95em;
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, #4776E6 0%, #8E54E9 100%);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            box-shadow: 0 5px 15px rgba(71, 118, 230, 0.2);
+        }
+
+        .btn-secondary {
+            background: #EDF2FF;
+            color: #4776E6;
+        }
+
+        .btn-secondary:hover {
+            background: #DBE4FF;
+        }
+
+        .comment-section {
+            margin-top: 15px;
+        }
+
+        .comment-input {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #E2E8F0;
+            border-radius: 8px;
+            margin-bottom: 12px;
+            transition: border-color 0.3s ease;
+        }
+
+        .comment-input:focus {
+            outline: none;
+            border-color: #4776E6;
+        }
+
+        .comments {
+            font-size: 0.95em;
+            color: #4A5568;
+        }
+
+        .comment {
+            padding: 12px;
+            border-left: 3px solid #4776E6;
+            margin-bottom: 10px;
+            background: #F8FAFF;
+            border-radius: 0 8px 8px 0;
+        }
+
+        .course-section {
+            margin-top: 40px;
+        }
+
+        .section-header {
+            color: #2D3748;
+            margin-bottom: 25px;
+            font-size: 1.5em;
+            font-weight: 600;
+        }
+
+        .course-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 25px;
+        }
+
+        .course-card {
+            background: white;
+            border-radius: 16px;
+            padding: 25px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            transition: transform 0.3s ease;
+        }
+
+        .course-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .course-header {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+
+        .course-icon {
+            width: 50px;
+            height: 50px;
+            background: linear-gradient(135deg, #4776E6 0%, #8E54E9 100%);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+            font-size: 1.2em;
+        }
+
+        .course-info h3 {
+            color: #2D3748;
+            margin-bottom: 5px;
+        }
+
+        .course-info p {
+            color: #718096;
+        }
+
+        .course-progress {
+            height: 8px;
+            background: #EDF2FF;
+            border-radius: 4px;
+            margin: 15px 0;
+            overflow: hidden;
+        }
+
+        .progress-bar {
+            height: 100%;
+            background: linear-gradient(135deg, #4776E6 0%, #8E54E9 100%);
+            border-radius: 4px;
+            transition: width 0.3s ease;
+        }
+
+        .progress-info {
+            display: flex;
+            justify-content: space-between;
+            color: #718096;
+            font-size: 0.9em;
+        }
+    </style>
+</head>
+<body>
+    <div class="dashboard">
+        <div class="dashboard-header">
+            <div>
+                <h1>Student Dashboard</h1>
+                <p style="opacity: 0.9; margin-top: 5px;">Welcome back, John Doe</p>
+            </div>
+            <div class="user-info">
+                <div class="user-avatar">JD</div>
+            </div>
+        </div>
+
+        <div class="dashboard-grid">
+            <!-- General Notices -->
+            <div class="card">
+                <div class="card-header">
+                    <h3>General Notices</h3>
+                    <span class="badge">3 New</span>
+                </div>
+                <div class="notice">
+                    <div class="notice-header">
+                        <span class="notice-title">Campus Event</span>
+                        <span class="notice-date">Today</span>
+                    </div>
+                    <div class="notice-content">
+                        Annual cultural fest starting next week. Don't miss out on early bird registration!
+                    </div>
+                    <div class="notice-actions">
+                        <button class="btn btn-secondary">Comment</button>
+                        <button class="btn btn-primary">Register</button>
+                    </div>
+                    <div class="comment-section">
+                        <input type="text" class="comment-input" placeholder="Write a comment...">
+                        <div class="comments">
+                            <div class="comment">Looking forward to the performances!</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Student-specific Notices -->
+            <div class="card">
+                <div class="card-header">
+                    <h3>Student Notices</h3>
+                    <span class="badge">2 New</span>
+                </div>
+                <div class="notice">
+                    <div class="notice-header">
+                        <span class="notice-title">Exam Schedule Update</span>
+                        <span class="notice-date">2 days ago</span>
+                    </div>
+                    <div class="notice-content">
+                        Mid-term examination schedule has been updated. Check your personal timeline.
+                    </div>
+                    <div class="notice-actions">
+                        <button class="btn btn-secondary">Comment</button>
+                        <button class="btn btn-primary">View Schedule</button>
+                    </div>
+                    <div class="comment-section">
+                        <input type="text" class="comment-input" placeholder="Write a comment...">
+                        <div class="comments">
+                            <div class="comment">When will the syllabus be available?</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Department Notices -->
+            <div class="card">
+                <div class="card-header">
+                    <h3>Department Notices</h3>
+                    <span class="badge">1 New</span>
+                </div>
+                <div class="notice">
+                    <div class="notice-header">
+                        <span class="notice-title">Python Workshop</span>
+                        <span class="notice-date">1 day ago</span>
+                    </div>
+                    <div class="notice-content">
+                        Advanced Python programming workshop this weekend. Limited seats available.
+                    </div>
+                    <div class="notice-actions">
+                        <button class="btn btn-secondary">Comment</button>
+                        <button class="btn btn-primary">Register</button>
+                    </div>
+                    <div class="comment-section">
+                        <input type="text" class="comment-input" placeholder="Write a comment...">
+                        <div class="comments">
+                            <div class="comment">What are the prerequisites?</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Course Management Section -->
+        <div class="course-section">
+            <h2 class="section-header">My Courses</h2>
+            <div class="course-grid">
+                <div class="course-card">
+                    <div class="course-header">
+                        <div class="course-icon">CS</div>
+                        <div class="course-info">
+                            <h3>Computer Science 101</h3>
+                            <p>Prof. Sarah Johnson</p>
+                        </div>
+                    </div>
+                    <div class="progress-info">
+                        <span>Next: Monday 10:00 AM</span>
+                        <span>75% Complete</span>
+                    </div>
+                    <div class="course-progress">
+                        <div class="progress-bar" style="width: 75%"></div>
+                    </div>
+                </div>
+
+                <div class="course-card">
+                    <div class="course-header">
+                        <div class="course-icon">MT</div>
+                        <div class="course-info">
+                            <h3>Advanced Mathematics</h3>
+                            <p>Prof. Michael Brown</p>
+                        </div>
+                    </div>
+                    <div class="progress-info">
+                        <span>Next: Tuesday 11:00 AM</span>
+                        <span>60% Complete</span>
+                    </div>
+                    <div class="course-progress">
+                        <div class="progress-bar" style="width: 60%"></div>
+                    </div>
+                </div>
+
+                <div class="course-card">
+                    <div class="course-header">
+                        <div class="course-icon">PH</div>
+                        <div class="course-info">
+                            <h3>Physics</h3>
+                            <p>Prof. Robert Wilson</p>
+                        </div>
+                    </div>
+                    <div class="progress-info">
+                        <span>Next: Wednesday 09:00 AM</span>
+                        <span>85% Complete</span>
+                    </div>
+                    <div class="course-progress">
+                        <div class="progress-bar" style="width: 85%"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Add comment functionality
+        document.querySelectorAll('.comment-input').forEach(input => {
+            input.addEventListener('keypress', function(e) {
+                if (e.key === 'Enter') {
+                    const comment = this.value;
+                    if (comment.trim()) {
+                        const commentDiv = document.createElement('div');
+                        commentDiv.className = 'comment';
+                        commentDiv.textContent = comment;
+                        this.nextElementSibling.appendChild(commentDiv);
+                        this.value = '';
+                    }
+                }
+            });
+        });
+    </script>
+</body>
+</html>
